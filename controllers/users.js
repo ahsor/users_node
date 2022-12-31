@@ -29,13 +29,15 @@ const createUser = (req, res) => {
 };
 
 const getUser = (req, res) => {
-    res.send(req.params.id)
+    const user = users.find((user) => user.id !== req.params.id);
+    res.send(user);
 };
 
 const deleteUser = (req, res) => { 
     console.log(`user with id ${req.params.id} has been deleted`);
     
     users = users.filter((user) => user.id !== req.params.id);
+    res.send(users)
 };
 
 const updateUser =  (req,res) => {
@@ -45,6 +47,7 @@ const updateUser =  (req,res) => {
     user.userpwd = req.body.userpwd; 
 
     console.log(`userid has been updated to ${req.body.userid}.userpwd has been updated to ${req.body.userpwd}`)
+    res.send( users);
 };
 
 module.exports = { getUsers, createUser, getUser, deleteUser, updateUser }
